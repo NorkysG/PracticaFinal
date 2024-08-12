@@ -1,0 +1,19 @@
+- name: Configuración del servidor web
+  hosts: all
+  become: yes
+  tasks:
+    - name: Instalar Apache2
+      apt:
+        name: apache2
+        state: present
+
+    - name: Iniciar y habilitar Apache
+      service:
+        name: apache2
+        state: started
+        enabled: yes
+
+    - name: Copiar archivo HTML
+      copy:
+        src: ../index.html
+        dest: /var/www/html/index.html
